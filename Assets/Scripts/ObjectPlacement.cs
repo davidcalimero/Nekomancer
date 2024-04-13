@@ -3,23 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjectContainer : MonoBehaviour
+public class ObjectPlacement : MonoBehaviour
 {
     public bool isFull;
     public Image containerImage;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(GameManager.instance.draggingObject && !isFull)
+        if(!isFull)
         {
-            GameManager.instance.currentContainer = gameObject;
             containerImage.enabled = true;
         }
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        GameManager.instance.currentContainer = null;
         containerImage.enabled = false;
+    }
+
+    public void TryToPlaceObject(GameObject objectGame)
+    {
+        if(!isFull)
+        {
+            isFull = true;
+            Instantiate(objectGame, transform).transform.position = transform.position;
+        }
+
     }
 }
