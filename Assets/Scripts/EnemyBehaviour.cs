@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EnemyBehaviour : MonoBehaviour
 {
     public float healthPoints = 20;
+    public float healthMaxPoints = 20;
     public float speed = 1.0f;
 
     public float damage = 5.0f;

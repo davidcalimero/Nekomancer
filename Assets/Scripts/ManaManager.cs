@@ -42,7 +42,7 @@ public class ManaManager : MonoBehaviour
         nextSpawnTime = Time.time + Random.Range(randomSpawnDelaySeconds.x, randomSpawnDelaySeconds.y);
     }
 
-    void SpawnEnergyObject()
+    public void SpawnEnergyObject()
     {
         if (spawnPlaces.Length > 0)
         {
