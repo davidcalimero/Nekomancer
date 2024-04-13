@@ -66,7 +66,6 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if(Time.time - _lastDamage > rateDamage + _attackVariation)
             {
-                animator.SetBool("Walking", false);
                 animator.SetTrigger("Attack");
             }
         }
@@ -80,13 +79,11 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             }
 
-            animator.SetBool("Walking", true);
             transform.GetComponent<RectTransform>().position += (endPos.position - transform.GetComponent<RectTransform>().position).normalized * 50 * _variation * speed * Time.deltaTime;
             facingSummoner = Vector2.Distance(transform.GetComponent<RectTransform>().position, endPos.position) <= 0.1f;
         }
         else if(facingSummoner && !reachedSummoner && Vector2.Distance(transform.GetComponent<RectTransform>().position, summoner.GetComponent<RectTransform>().position) > 0.1f)
         {
-            animator.SetBool("Walking", true);
             transform.GetComponent<RectTransform>().position += (summoner.GetComponent<RectTransform>().position - transform.GetComponent<RectTransform>().position).normalized * 50 * _variation * speed * Time.deltaTime;
         }
     }
@@ -175,7 +172,6 @@ public class EnemyBehaviour : MonoBehaviour
         if(collision.tag.Equals("Player") && !reachedSummoner)
         {
             reachedSummoner = true;
-            animator.SetBool("Walking", false);
             animator.SetTrigger("Attack");
             StartCoroutine(_FallObject(0, transform.GetChild(0).gameObject));
             StartCoroutine(_FallObject(1, transform.GetChild(1).gameObject));
@@ -195,15 +191,6 @@ public class EnemyBehaviour : MonoBehaviour
     private IEnumerator _FallObject(int item, GameObject obj)
     {
         yield return new WaitForSeconds(.1f + Random.Range(.1f,.4f));
-
-        if (item == 0 && !hasHelment) yield break;
-
-        if (item == 1 && !hasHelmentDamange) yield break;
-
-        if (item == 2 && !hasShield) yield break;
-
-        if (item == 3 && !hasShieldDamage) yield break;
-
 
         Vector2 _initPos = obj.GetComponent<RectTransform>().anchoredPosition;
 

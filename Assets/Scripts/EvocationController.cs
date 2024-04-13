@@ -10,6 +10,7 @@ public class EvocationController : MonoBehaviour
     public float cooldownFire = 1;
 
     public GameObject bulletPrefab;
+    public Animator animator;
 
     private float _lastFire;
     private float _variationFire = 0;
@@ -19,13 +20,27 @@ public class EvocationController : MonoBehaviour
         _lastFire = Time.time;
     }
 
-    public void AttackEnemy()
+    void SpawnBullet() {
+        GameObject _bullet = Instantiate(bulletPrefab, transform.parent.parent);
+        Vector3 position = transform.position;
+        position.y += 25;
+        _bullet.transform.position = position;
+        
+    }
+
+    void AttackEnemy()
     {
         if (Time.time - _lastFire > cooldownFire + _variationFire)
         {
-            GameObject _bullet = Instantiate(bulletPrefab, transform.parent.parent);
-            _bullet.transform.position = transform.position;
-
+            if (animator)
+            {
+                animator.SetTrigger("Attack");
+            }
+            else
+            {
+                SpawnBullet();
+            }
+            
             _lastFire = Time.time;
             _variationFire = Random.Range(.2f, .6f);
         }
