@@ -56,6 +56,11 @@ public class EnemyBehaviour : MonoBehaviour
         {
             _isAttacking = true;
         }
+        if (collision.tag.Equals("BulletNormal"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
     public void OnTriggerExit2D(Collider2D collision)
     {

@@ -27,7 +27,7 @@ public class EnemyWaveController : MonoBehaviour
         }
     }
 
-    private void GenerateNewRandomEnemy()
+    public void GenerateNewRandomEnemy()
     {
         int _randomIndex = (int) Random.Range(0, _enemyLanes.Count);
 

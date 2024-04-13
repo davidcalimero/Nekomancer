@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8412830507058676446}
   - component: {fileID: 1494550731770736559}
   - component: {fileID: 3372978545047787176}
+  - component: {fileID: 6109564445117082568}
   m_Layer: 5
   m_Name: EnemyPrefab
   m_TagString: Untagged
@@ -135,5 +136,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  indexLane: 0
   initPos: {fileID: 0}
   endPos: {fileID: 0}
+--- !u!50 &6109564445117082568
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404156826384146142}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
