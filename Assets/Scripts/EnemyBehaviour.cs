@@ -85,14 +85,17 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Attack()
     {
-        _evocationAttacking.GetComponent<EvocationController>().healthPoints -= damage;
-        if (_evocationAttacking.GetComponent<EvocationController>().healthPoints <= 0)
+        if (_evocationAttacking != null)
         {
-            _isAttacking = false;
-            _evocationAttacking.transform.parent.GetComponent<ObjectPlacement>().isFull = false;
+            _evocationAttacking.GetComponent<EvocationController>().healthPoints -= damage;
+            if (_evocationAttacking.GetComponent<EvocationController>().healthPoints <= 0)
+            {
+                _isAttacking = false;
+                _evocationAttacking.transform.parent.GetComponent<ObjectPlacement>().isFull = false;
 
-            Destroy(_evocationAttacking);
-            _evocationAttacking = null;
+                Destroy(_evocationAttacking);
+                _evocationAttacking = null;
+            }
         }
         _lastDamage = Time.time;
     }
