@@ -48,9 +48,9 @@ public class EvocationController : MonoBehaviour
 
     private bool IsReadyToAttack()
     {
-        if(transform.parent.parent.GetChild(9).transform.childCount > 2)
+        if(transform.parent.parent.GetChild(0).transform.childCount > 2)
         {
-            if(Vector3.Distance(transform.position, transform.parent.parent.GetChild(9).transform.GetChild(transform.parent.parent.GetChild(9).transform.childCount - 1).position) < 400)
+            if(Vector3.Distance(transform.position, transform.parent.parent.GetChild(0).transform.GetChild(transform.parent.parent.GetChild(0).transform.childCount - 1).position) < 400)
             {
                 return true;
             }
