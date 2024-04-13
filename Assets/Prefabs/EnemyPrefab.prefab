@@ -217,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 20
   healthMaxPoints: 20
-  speed: 1
+  speed: 0.5
   damage: 7
   rateDamage: 3
   indexLane: 0
@@ -231,6 +231,7 @@ MonoBehaviour:
   helmentDamangeHealth: 2
   initPos: {fileID: 0}
   endPos: {fileID: 0}
+  summoner: {fileID: 0}
   animator: {fileID: 2872749040344222482}
 --- !u!50 &6109564445117082568
 Rigidbody2D:

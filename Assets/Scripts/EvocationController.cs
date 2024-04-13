@@ -42,6 +42,11 @@ public class EvocationController : MonoBehaviour
 
     private void Update()
     {
+        if (GameFlow.instance.gameFinished)
+        {
+            return;
+        }
+
         if (IsReadyToAttack()) AttackEnemy();
     }
 

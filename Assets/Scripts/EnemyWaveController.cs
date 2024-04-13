@@ -7,6 +7,7 @@ public class EnemyWaveController : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject enemySuperPrefab;
+    public GameObject summoner;
 
     public List<int> occupationNum = new List<int>();
 
@@ -65,6 +66,7 @@ public class EnemyWaveController : MonoBehaviour
         _newEnemy.GetComponent<EnemyBehaviour>().initPos = _enemyLanes[_randomIndex].transform.GetChild(0).GetComponent<RectTransform>();
         _newEnemy.GetComponent<EnemyBehaviour>().endPos = _enemyLanes[_randomIndex].transform.GetChild(1).GetComponent<RectTransform>();
         _newEnemy.GetComponent<EnemyBehaviour>().indexLane = _randomIndex;
+        _newEnemy.GetComponent<EnemyBehaviour>().summoner = summoner;
         _newEnemy.transform.SetSiblingIndex(2);
 
         _newEnemy.GetComponent<EnemyBehaviour>().healthPoints = challengeLevel;
@@ -101,6 +103,7 @@ public class EnemyWaveController : MonoBehaviour
         _newEnemy.GetComponent<EnemyBehaviour>().initPos = _enemyLanes[_randomIndex].transform.GetChild(0).GetComponent<RectTransform>();
         _newEnemy.GetComponent<EnemyBehaviour>().endPos = _enemyLanes[_randomIndex].transform.GetChild(1).GetComponent<RectTransform>();
         _newEnemy.GetComponent<EnemyBehaviour>().indexLane = _randomIndex;
+        _newEnemy.GetComponent<EnemyBehaviour>().summoner = summoner;
         _newEnemy.transform.SetSiblingIndex(2);
 
         _newEnemy.GetComponent<EnemyBehaviour>().healthPoints = challengeLevel;

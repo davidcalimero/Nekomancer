@@ -25,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour
     
     public RectTransform initPos;
     public RectTransform endPos;
+    public GameObject summoner;
 
     public Animator animator;
 
@@ -36,10 +37,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     private GameObject _evocationAttacking = null;
     private float _attackVariation = 0;
+    private bool facingSummoner = false;
+    private bool reachedSummoner = false;
 
     public IEnumerator Start()
     {
-        transform.GetComponent<RectTransform>().anchoredPosition = initPos.anchoredPosition;
+        transform.GetComponent<RectTransform>().position = initPos.position;
 
         _variation = Random.Range(0.7f, 0.9f);
         _variationNextEnemy = Random.Range(10, 45);
@@ -54,6 +57,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Update()
     {
+        if(GameFlow.instance.gameFinished)
+        {
+            return;
+        }
+
         if (_isAttacking && _evocationAttacking)
         {
             if(Time.time - _lastDamage > rateDamage + _attackVariation)
@@ -62,24 +70,24 @@ public class EnemyBehaviour : MonoBehaviour
                 animator.SetTrigger("Attack");
             }
         }
-        else if (Vector2.Distance(transform.GetComponent<RectTransform>().anchoredPosition, endPos.anchoredPosition) > 0.1f)
+        else if (!facingSummoner && Vector2.Distance(transform.GetComponent<RectTransform>().position, endPos.position) > 0.1f)
         {
             if(transform.GetSiblingIndex() < transform.parent.childCount - 1)
             {
-                if(Vector2.Distance(transform.GetComponent<RectTransform>().anchoredPosition, transform.parent.GetChild(transform.GetSiblingIndex()+1).GetComponent<RectTransform>().anchoredPosition) < _variationNextEnemy)
+                if(Vector2.Distance(transform.GetComponent<RectTransform>().position, transform.parent.GetChild(transform.GetSiblingIndex()+1).GetComponent<RectTransform>().position) < _variationNextEnemy)
                 {
                     return;
                 }
             }
 
             animator.SetBool("Walking", true);
-            transform.GetComponent<RectTransform>().anchoredPosition += (endPos.anchoredPosition - transform.GetComponent<RectTransform>().anchoredPosition).normalized * 50 * _variation * speed * Time.deltaTime;
+            transform.GetComponent<RectTransform>().position += (endPos.position - transform.GetComponent<RectTransform>().position).normalized * 50 * _variation * speed * Time.deltaTime;
+            facingSummoner = Vector2.Distance(transform.GetComponent<RectTransform>().position, endPos.position) <= 0.1f;
         }
-        else
+        else if(facingSummoner && !reachedSummoner && Vector2.Distance(transform.GetComponent<RectTransform>().position, summoner.GetComponent<RectTransform>().position) > 0.1f)
         {
-            FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane);
-
-            Destroy(gameObject);
+            animator.SetBool("Walking", true);
+            transform.GetComponent<RectTransform>().position += (summoner.GetComponent<RectTransform>().position - transform.GetComponent<RectTransform>().position).normalized * 50 * _variation * speed * Time.deltaTime;
         }
     }
 
@@ -97,6 +105,14 @@ public class EnemyBehaviour : MonoBehaviour
                 _evocationAttacking = null;
             }
         }
+
+        if(reachedSummoner)
+        {
+            FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane);
+            GameFlow.instance.LoseLife(damage);
+            Destroy(gameObject);
+        }
+
         _lastDamage = Time.time;
     }
 
@@ -124,7 +140,7 @@ public class EnemyBehaviour : MonoBehaviour
                 shieldDamageHealth -= collision.gameObject.GetComponent<BulletController>().damage;
                 if (shieldDamageHealth <= 0) {
                     hasShieldDamage = false;
-                    StartCoroutine(_FallObject(0, transform.GetChild(3).gameObject));
+                    StartCoroutine(_FallObject(3, transform.GetChild(3).gameObject));
                 }
             }
             else if (hasHelment)
@@ -142,7 +158,7 @@ public class EnemyBehaviour : MonoBehaviour
                 helmentDamangeHealth -= collision.gameObject.GetComponent<BulletController>().damage;
                 if (helmentDamangeHealth <= 0) {
                     hasHelmentDamange = false;
-                    StartCoroutine(_FallObject(2,transform.GetChild(1).gameObject));
+                    StartCoroutine(_FallObject(1,transform.GetChild(1).gameObject));
                 }
             }
             else
@@ -154,6 +170,17 @@ public class EnemyBehaviour : MonoBehaviour
 
             if(healthPoints <= 0)
                 Destroy(gameObject);
+        }
+
+        if(collision.tag.Equals("Player") && !reachedSummoner)
+        {
+            reachedSummoner = true;
+            animator.SetBool("Walking", false);
+            animator.SetTrigger("Attack");
+            StartCoroutine(_FallObject(0, transform.GetChild(0).gameObject));
+            StartCoroutine(_FallObject(1, transform.GetChild(1).gameObject));
+            StartCoroutine(_FallObject(2, transform.GetChild(2).gameObject));
+            StartCoroutine(_FallObject(3, transform.GetChild(3).gameObject));
         }
     }
 
@@ -169,9 +196,13 @@ public class EnemyBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f + Random.Range(.1f,.4f));
 
-        if (item == 1 && !hasShieldDamage) yield break;
-        
-        if (item == 3 && !hasHelmentDamange) yield break;
+        if (item == 0 && !hasHelment) yield break;
+
+        if (item == 1 && !hasHelmentDamange) yield break;
+
+        if (item == 2 && !hasShield) yield break;
+
+        if (item == 3 && !hasShieldDamage) yield break;
 
 
         Vector2 _initPos = obj.GetComponent<RectTransform>().anchoredPosition;

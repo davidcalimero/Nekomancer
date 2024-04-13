@@ -28,6 +28,11 @@ public class LevelController : MonoBehaviour
 
     public void Update()
     {
+        if (GameFlow.instance.gameFinished)
+        {
+            return;
+        }
+
         if (Time.time - _lastWave > timePerWave)
         {
             print("new wave");

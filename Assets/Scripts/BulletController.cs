@@ -10,6 +10,11 @@ public class BulletController : MonoBehaviour
 
     void Update()
     {
+        if (GameFlow.instance.gameFinished)
+        {
+            return;
+        }
+
         transform.GetComponent<RectTransform>().anchoredPosition += Vector2.up * speed * 100 * Time.deltaTime;
         if (transform.GetComponent<RectTransform>().anchoredPosition.y > 1520) DestroyImmediate(gameObject);
     }
