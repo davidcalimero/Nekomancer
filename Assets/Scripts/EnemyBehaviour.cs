@@ -60,16 +60,6 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 animator.SetBool("Walking", false);
                 animator.SetTrigger("Attack");
-                _evocationAttacking.GetComponent<EvocationController>().healthPoints -= damage;
-                if (_evocationAttacking.GetComponent<EvocationController>().healthPoints <= 0)
-                {
-                    _isAttacking = false;
-                    _evocationAttacking.transform.parent.GetComponent<ObjectPlacement>().isFull = false;
-
-                    DestroyImmediate(_evocationAttacking);
-                    _evocationAttacking = null;
-                }
-                _lastDamage = Time.time;
             }
         }
         else if (Vector2.Distance(transform.GetComponent<RectTransform>().anchoredPosition, endPos.anchoredPosition) > 0.1f)
@@ -91,6 +81,20 @@ public class EnemyBehaviour : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    private void Attack()
+    {
+        _evocationAttacking.GetComponent<EvocationController>().healthPoints -= damage;
+        if (_evocationAttacking.GetComponent<EvocationController>().healthPoints <= 0)
+        {
+            _isAttacking = false;
+            _evocationAttacking.transform.parent.GetComponent<ObjectPlacement>().isFull = false;
+
+            DestroyImmediate(_evocationAttacking);
+            _evocationAttacking = null;
+        }
+        _lastDamage = Time.time;
     }
 
     public void OnTriggerStay2D(Collider2D collision)
