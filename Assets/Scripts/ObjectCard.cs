@@ -2,30 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ObjectCard : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public GameObject objectDrag;
     public GameObject objectGame;
+    public int manaCost;
 
     private GameObject dragInstance;
 
-    void IDragHandler.OnDrag(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
         dragInstance.transform.position = Input.mousePosition;
     }
 
-    void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         dragInstance = Instantiate(objectDrag, transform);
         dragInstance.GetComponent<ObjectDrag>().objectGame = objectGame;
         dragInstance.transform.position = Input.mousePosition;
     }
 
-    void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
-        dragInstance.GetComponent<ObjectDrag>().TryToPlaceObject();
+        if(HasEnoughMana() && dragInstance.GetComponent<ObjectDrag>().TryToPlaceObject())
+        {
+            ManaManager.instance.manaAmount -= manaCost;
+        }
         Destroy(dragInstance);
         dragInstance = null;
     }
+
+    void Update()
+    {
+        if(HasEnoughMana())
+        {
+            GetComponent<Image>().color = Color.white;
+        } else
+        {
+            GetComponent<Image>().color = Color.grey;
+        }
+        
+    }
+
+    private bool HasEnoughMana()
+    {
+        return ManaManager.instance.manaAmount >= manaCost;
+    }
+
 }

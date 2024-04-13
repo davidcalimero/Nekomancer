@@ -1266,6 +1266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 490471083}
   - component: {fileID: 490471084}
+  - component: {fileID: 490471085}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1302,6 +1303,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1404156826384146142, guid: ff0455c0374065145a90788f9a981374, type: 3}
   occupationNum: 
+--- !u!114 &490471085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490471082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838c3071d02be4b9da7f113d7beeaa76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomSpawnDelaySeconds: {x: 10, y: 20}
+  spawnPlaces:
+  - {fileID: 1913200522}
+  manaObject: {fileID: 7567328841752666974, guid: dc97f55d7209b430fb754bf7512168b8, type: 3}
+  manaAmount: 0
 --- !u!1 &503698900
 GameObject:
   m_ObjectHideFlags: 0
@@ -5411,6 +5429,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 902381877563270251, guid: 69b4aba0c88384ef981608ce862662cb, type: 3}
   m_PrefabInstance: {fileID: 1913200520}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1913200522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3949808038381085285, guid: 69b4aba0c88384ef981608ce862662cb, type: 3}
+  m_PrefabInstance: {fileID: 1913200520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1934606964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6103,6 +6126,10 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 375410762}
+    - target: {fileID: 6148863228942433905, guid: aaa818bbf089c40f19e889c7d0821360, type: 3}
+      propertyPath: manaCost
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6148863228942433905, guid: aaa818bbf089c40f19e889c7d0821360, type: 3}
       propertyPath: objectDrag
       value: 
