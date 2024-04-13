@@ -1574,6 +1574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 30
   losePopup: {fileID: 1962571890}
+  gameFinished: 0
 --- !u!1 &503698900
 GameObject:
   m_ObjectHideFlags: 0
