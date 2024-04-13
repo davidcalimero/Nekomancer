@@ -57,6 +57,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if(Time.time - _lastDamage > rateDamage + _attackVariation)
             {
+                animator.SetBool("Walking", false);
                 animator.SetTrigger("Attack");
                 _evocationAttacking.GetComponent<EvocationController>().healthPoints -= damage;
                 if (_evocationAttacking.GetComponent<EvocationController>().healthPoints <= 0)
@@ -78,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             }
 
+            animator.SetBool("Walking", true);
             transform.GetComponent<RectTransform>().anchoredPosition += (endPos.anchoredPosition - transform.GetComponent<RectTransform>().anchoredPosition).normalized * 50 * _variation * speed * Time.deltaTime;
         }
         else
@@ -118,7 +120,7 @@ public class EnemyBehaviour : MonoBehaviour
             else if (hasHelment)
             {
                 heltmetHealth -= collision.gameObject.GetComponent<BulletController>().damage;
-                if (shieldHealth <= 0)
+                if (heltmetHealth <= 0)
                 {
                     hasHelment = false;
                     hasHelmentDamange = true;
