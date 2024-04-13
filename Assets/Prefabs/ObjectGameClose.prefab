@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8d59195d98d6c4cb5c731861ad927e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 50
+  healthPoints: 100
   maxHealthPoints: 50
   cooldownFire: 1
   bulletPrefab: {fileID: 670216446400468744, guid: 3dd99a79ccdcb9641b2209140d02ef8f, type: 3}

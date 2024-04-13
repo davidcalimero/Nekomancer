@@ -6,8 +6,7 @@ using UnityEngine;
 public class EvocationController : MonoBehaviour
 {
     public float healthPoints = 50;
-    public float maxHealthPoints = 50;
-
+    public int distance = 400;
     public float cooldownFire = 1;
 
     public GameObject bulletPrefab;
@@ -50,7 +49,7 @@ public class EvocationController : MonoBehaviour
     {
         if(transform.parent.parent.GetChild(0).transform.childCount > 2)
         {
-            if(Vector3.Distance(transform.position, transform.parent.parent.GetChild(0).transform.GetChild(transform.parent.parent.GetChild(0).transform.childCount - 1).position) < 400)
+            if(Vector3.Distance(transform.position, transform.parent.parent.GetChild(0).transform.GetChild(transform.parent.parent.GetChild(0).transform.childCount - 1).position) < distance)
             {
                 return true;
             }
