@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1645671065998712141}
   - component: {fileID: 8825484042988427332}
   m_Layer: 6
-  m_Name: ObjectDrag
+  m_Name: ObjectDragRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

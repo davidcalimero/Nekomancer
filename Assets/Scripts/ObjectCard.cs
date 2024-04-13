@@ -8,9 +8,15 @@ public class ObjectCard : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
 {
     public GameObject objectDrag;
     public GameObject objectGame;
+    public Text textCost;
     public int manaCost;
 
     private GameObject dragInstance;
+
+    void Start()
+    {
+        textCost.text = manaCost.ToString();
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
