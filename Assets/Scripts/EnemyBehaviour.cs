@@ -110,7 +110,10 @@ public class EnemyBehaviour : MonoBehaviour
             else if(hasShieldDamage)
             {
                 shieldDamageHealth -= collision.gameObject.GetComponent<BulletController>().damage;
-                if (shieldDamageHealth <= 0) { StartCoroutine(_FallObject(0, transform.GetChild(1).gameObject)); }
+                if (shieldDamageHealth <= 0) {
+                    hasShieldDamage = false;
+                    StartCoroutine(_FallObject(0, transform.GetChild(1).gameObject));
+                }
             }
             else if (hasHelment)
             {
@@ -125,7 +128,10 @@ public class EnemyBehaviour : MonoBehaviour
             else if (hasHelmentDamange)
             {
                 helmentDamangeHealth -= collision.gameObject.GetComponent<BulletController>().damage;
-                if (helmentDamangeHealth <= 0) { StartCoroutine(_FallObject(2,transform.GetChild(3).gameObject)); }
+                if (helmentDamangeHealth <= 0) {
+                    hasHelmentDamange = false;
+                    StartCoroutine(_FallObject(2,transform.GetChild(3).gameObject));
+                }
             }
             else
             {
@@ -151,19 +157,9 @@ public class EnemyBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f + Random.Range(.1f,.4f));
 
-        if (item == 1 && hasShieldDamage)
-        {
-            hasShieldDamage = false;
-            yield return null;
-        }
-        else if (item == 1 && !hasShieldDamage) yield break;
+        if (item == 1 && !hasShieldDamage) yield break;
         
-        if (item == 1 && hasHelmentDamange)
-        {
-            hasHelmentDamange = false;
-            yield return null;
-        }
-        else if (item == 1 && !hasHelmentDamange) yield break;
+        if (item == 3 && !hasHelmentDamange) yield break;
 
 
         Vector2 _initPos = obj.GetComponent<RectTransform>().anchoredPosition;
