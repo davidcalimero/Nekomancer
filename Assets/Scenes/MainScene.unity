@@ -1355,6 +1355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1404156826384146142, guid: ff0455c0374065145a90788f9a981374, type: 3}
+  enemySuperPrefab: {fileID: 1404156826384146142, guid: 9790834766de7fe4384a6e9f9623a329, type: 3}
   occupationNum: 
 --- !u!114 &490471085
 MonoBehaviour:
