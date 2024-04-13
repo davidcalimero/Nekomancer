@@ -110,15 +110,15 @@ public class EnemyBehaviour : MonoBehaviour
             else if(hasShieldDamage)
             {
                 shieldDamageHealth -= collision.gameObject.GetComponent<BulletController>().damage;
-                if (shieldHealth <= 0) { StartCoroutine(_FallObject(0, transform.GetChild(1).gameObject)); }
+                if (shieldDamageHealth <= 0) { StartCoroutine(_FallObject(0, transform.GetChild(1).gameObject)); }
             }
             else if (hasHelment)
             {
                 heltmetHealth -= collision.gameObject.GetComponent<BulletController>().damage;
                 if (shieldHealth <= 0)
                 {
-                    hasShield = false;
-                    hasShieldDamage = true;
+                    hasHelment = false;
+                    hasHelmentDamange = true;
                     UpdateVisuals();
                 }
             }
