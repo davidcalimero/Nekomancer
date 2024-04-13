@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ManaManager : MonoBehaviour
 {
     public Vector2 randomSpawnDelaySeconds;
     public GameObject[] spawnPlaces;
     public GameObject manaObject;
+    public Text manaAmountText;
     public int manaAmount = 0;
 
     private float nextSpawnTime;
@@ -27,6 +29,7 @@ public class ManaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        manaAmountText.text = manaAmount.ToString();
         if (Time.time >= nextSpawnTime)
         {
             SpawnEnergyObject();
