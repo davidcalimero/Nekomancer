@@ -6,6 +6,8 @@ TagManager:
   tags:
   - EnemyLane
   - BulletNormal
+  - Encantation
+  - Evocation
   layers:
   - Default
   - TransparentFX

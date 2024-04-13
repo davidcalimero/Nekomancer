@@ -135,7 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afbd72b6b239baa40b2f8dde932677ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPoints: 20
   speed: 1
+  damage: 7
+  rateDamage: 1
   indexLane: 0
   initPos: {fileID: 0}
   endPos: {fileID: 0}

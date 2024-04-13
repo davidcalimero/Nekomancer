@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0beee9043e9f55e48a1428e38b3085c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 5
   speed: 1
 --- !u!222 &1699160181775573381
 CanvasRenderer:
