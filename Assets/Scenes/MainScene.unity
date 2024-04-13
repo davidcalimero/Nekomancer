@@ -1317,7 +1317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838c3071d02be4b9da7f113d7beeaa76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomSpawnDelaySeconds: {x: 10, y: 20}
+  randomSpawnDelaySeconds: {x: 5, y: 10}
   spawnPlaces:
   - {fileID: 1913200522}
   manaObject: {fileID: 7567328841752666974, guid: dc97f55d7209b430fb754bf7512168b8, type: 3}

@@ -1,8 +1,5 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,19 +9,23 @@ public class EnemyBehaviour : MonoBehaviour
     public float speed = 1.0f;
 
     public float damage = 5.0f;
-    public float rateDamage = 1.0f;
+    public float rateDamage = 3.0f;
 
     public int indexLane;
 
     public bool hasShield;
-    public float shieldHealth = 5;
-    public bool hasHeadband1;
-    public float headband1Health = 5;
-    public bool hasHeadband2;
-    public float headband2Health = 5;
+    public float shieldHealth = 3;
+    public bool hasShieldDamage;
+    public float shieldDamageHealth = 2;
+    public bool hasHelment;
+    public float heltmetHealth = 3;
+    public bool hasHelmentDamange;
+    public float helmentDamangeHealth = 2;
     
     public RectTransform initPos;
     public RectTransform endPos;
+
+    public Animator animator;
 
     private bool _isAttacking = false;
     private float _variation = 1.0f;
@@ -47,22 +48,22 @@ public class EnemyBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(.2f);
 
-        transform.GetChild(0).gameObject.SetActive(hasShield);
-        transform.GetChild(1).gameObject.SetActive(hasHeadband1);
-        transform.GetChild(2).gameObject.SetActive(hasHeadband2);
+        UpdateVisuals();
     }
 
     public void Update()
     {
-        if (_isAttacking)
+        if (_isAttacking && _evocationAttacking)
         {
             if(Time.time - _lastDamage > rateDamage + _attackVariation)
             {
+                animator.SetTrigger("Attack");
                 _evocationAttacking.GetComponent<EvocationController>().healthPoints -= damage;
                 if (_evocationAttacking.GetComponent<EvocationController>().healthPoints <= 0)
                 {
                     _isAttacking = false;
                     DestroyImmediate(_evocationAttacking);
+                    _evocationAttacking = null;
                 }
                 _lastDamage = Time.time;
             }
@@ -96,20 +97,35 @@ public class EnemyBehaviour : MonoBehaviour
         }
         if (collision.tag.Equals("BulletNormal"))
         {
-            if (hasShield && shieldHealth > 0)
+            if (hasShield)
             {
                 shieldHealth -= collision.gameObject.GetComponent<BulletController>().damage;
-                if(shieldHealth <= 0) { StartCoroutine(_FallObject(0, transform.GetChild(0).gameObject)); }
+                if(shieldHealth <= 0)
+                {
+                    hasShield = false;
+                    hasShieldDamage = true;
+                    UpdateVisuals();
+                }
             }
-            else if (hasHeadband1 && headband1Health > 0)
+            else if(hasShieldDamage)
             {
-                headband1Health -= collision.gameObject.GetComponent<BulletController>().damage;
-                if (headband1Health <= 0) { StartCoroutine(_FallObject(1,transform.GetChild(1).gameObject)); }
+                shieldDamageHealth -= collision.gameObject.GetComponent<BulletController>().damage;
+                if (shieldHealth <= 0) { StartCoroutine(_FallObject(0, transform.GetChild(1).gameObject)); }
             }
-            else if (hasHeadband2 && headband2Health > 0)
+            else if (hasHelment)
             {
-                headband2Health -= collision.gameObject.GetComponent<BulletController>().damage;
-                if (headband2Health <= 0) { StartCoroutine(_FallObject(2,transform.GetChild(2).gameObject)); }
+                heltmetHealth -= collision.gameObject.GetComponent<BulletController>().damage;
+                if (shieldHealth <= 0)
+                {
+                    hasShield = false;
+                    hasShieldDamage = true;
+                    UpdateVisuals();
+                }
+            }
+            else if (hasHelmentDamange)
+            {
+                helmentDamangeHealth -= collision.gameObject.GetComponent<BulletController>().damage;
+                if (helmentDamangeHealth <= 0) { StartCoroutine(_FallObject(2,transform.GetChild(3).gameObject)); }
             }
             else
             {
@@ -123,30 +139,31 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    private void UpdateVisuals()
+    {
+        transform.GetChild(0).gameObject.SetActive(hasShield);
+        transform.GetChild(1).gameObject.SetActive(hasShieldDamage);
+        transform.GetChild(2).gameObject.SetActive(hasHelment);
+        transform.GetChild(3).gameObject.SetActive(hasHelmentDamange);
+    }
+
     private IEnumerator _FallObject(int item, GameObject obj)
     {
         yield return new WaitForSeconds(.1f + Random.Range(.1f,.4f));
 
-        if (item == 0 && hasShield)
+        if (item == 1 && hasShieldDamage)
         {
-            hasShield = false;
+            hasShieldDamage = false;
             yield return null;
         }
-        else if (item == 0 && !hasShield) yield break;
+        else if (item == 1 && !hasShieldDamage) yield break;
         
-        if (item == 1 && hasHeadband1)
+        if (item == 1 && hasHelmentDamange)
         {
-            hasHeadband1 = false;
+            hasHelmentDamange = false;
             yield return null;
         }
-        else if (item == 1 && !hasHeadband1) yield break;
-
-        if (item == 2 && hasHeadband2)
-        {
-            hasHeadband2 = false;
-            yield return null;
-        }
-        else if (item == 2 && !hasHeadband2) yield break;
+        else if (item == 1 && !hasHelmentDamange) yield break;
 
 
         Vector2 _initPos = obj.GetComponent<RectTransform>().anchoredPosition;
@@ -162,6 +179,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
     }
+
     public void OnTriggerExit2D(Collider2D collision)
     {
 

@@ -37,9 +37,20 @@ public class EnemyWaveController : MonoBehaviour
         _newEnemy.GetComponent<EnemyBehaviour>().indexLane = _randomIndex;
         _newEnemy.transform.SetSiblingIndex(2);
 
-        _newEnemy.GetComponent<EnemyBehaviour>().hasShield = (int)Random.Range(0, 3) > 1;
-        _newEnemy.GetComponent<EnemyBehaviour>().hasHeadband1 = (int)Random.Range(0, 3) < 1;
-        _newEnemy.GetComponent<EnemyBehaviour>().hasHeadband2 = (int)Random.Range(0, 3) == 0;
+        bool hasShield = Random.value >= 0.5;
+        _newEnemy.GetComponent<EnemyBehaviour>().hasShield = hasShield;
+        if(!hasShield)
+        {
+            _newEnemy.GetComponent<EnemyBehaviour>().hasShieldDamage = Random.value >= 0.5;
+        }
+
+        bool hasHelmet = Random.value >= 0.5;
+        _newEnemy.GetComponent<EnemyBehaviour>().hasHelment = hasHelmet;
+        if(!hasHelmet)
+        {
+            _newEnemy.GetComponent<EnemyBehaviour>().hasHelmentDamange = Random.value >= 0.5;
+        }
+        
                
 
         occupationNum[_randomIndex]++;
