@@ -91,7 +91,7 @@ public class EnemyBehaviour : MonoBehaviour
             _isAttacking = false;
             _evocationAttacking.transform.parent.GetComponent<ObjectPlacement>().isFull = false;
 
-            DestroyImmediate(_evocationAttacking);
+            Destroy(_evocationAttacking);
             _evocationAttacking = null;
         }
         _lastDamage = Time.time;

@@ -12,6 +12,11 @@ public class ObjectDrag : MonoBehaviour
         objectPlacement = collision.GetComponent<ObjectPlacement>();
     }
 
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        objectPlacement = null;
+    }
+
     public bool TryToPlaceObject()
     {
         return objectPlacement && objectPlacement.TryToPlaceObject(objectGame);
