@@ -115,7 +115,7 @@ public class EnemyBehaviour : MonoBehaviour
                 shieldDamageHealth -= collision.gameObject.GetComponent<BulletController>().damage;
                 if (shieldDamageHealth <= 0) {
                     hasShieldDamage = false;
-                    StartCoroutine(_FallObject(0, transform.GetChild(1).gameObject));
+                    StartCoroutine(_FallObject(0, transform.GetChild(3).gameObject));
                 }
             }
             else if (hasHelment)
@@ -133,7 +133,7 @@ public class EnemyBehaviour : MonoBehaviour
                 helmentDamangeHealth -= collision.gameObject.GetComponent<BulletController>().damage;
                 if (helmentDamangeHealth <= 0) {
                     hasHelmentDamange = false;
-                    StartCoroutine(_FallObject(2,transform.GetChild(3).gameObject));
+                    StartCoroutine(_FallObject(2,transform.GetChild(1).gameObject));
                 }
             }
             else
@@ -150,10 +150,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void UpdateVisuals()
     {
-        transform.GetChild(0).gameObject.SetActive(hasShield);
-        transform.GetChild(1).gameObject.SetActive(hasShieldDamage);
-        transform.GetChild(2).gameObject.SetActive(hasHelment);
-        transform.GetChild(3).gameObject.SetActive(hasHelmentDamange);
+        transform.GetChild(0).gameObject.SetActive(hasHelment);
+        transform.GetChild(1).gameObject.SetActive(hasHelmentDamange);
+        transform.GetChild(2).gameObject.SetActive(hasShield);
+        transform.GetChild(3).gameObject.SetActive(hasShieldDamage);
     }
 
     private IEnumerator _FallObject(int item, GameObject obj)
