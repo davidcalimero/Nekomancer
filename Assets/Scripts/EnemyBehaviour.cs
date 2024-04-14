@@ -24,6 +24,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float helmentDamangeHealth = 2;
     public AudioSource attack;
     public AudioSource damageSound;
+    public AudioSource deathSound;
 
     public RectTransform initPos;
     public RectTransform endPos;
@@ -114,6 +115,7 @@ public class EnemyBehaviour : MonoBehaviour
             GameFlow.instance.LoseLife(damage);
             animator.SetTrigger("Death");
             died = true;
+            deathSound.Play();
         }
     }
 
@@ -177,6 +179,7 @@ public class EnemyBehaviour : MonoBehaviour
                 FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane, transform.position);
                 animator.SetTrigger("Death");
                 died = true;
+                deathSound.Play();
             }
         }
 
