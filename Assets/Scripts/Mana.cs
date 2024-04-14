@@ -48,6 +48,6 @@ public class Mana : MonoBehaviour
         int randomSign = Random.value < 0.5 ? -1 : 1;
         Vector3 controlPoint = (startPoint + endPoint) / 2 + new Vector3(200 * randomSign, 200, 0);
 
-        StartCoroutine(MoveObjectAlongCurve(gameObject, startPoint, controlPoint, endPoint, 0.2f));
+        StartCoroutine(MoveObjectAlongCurve(gameObject, startPoint, controlPoint, endPoint, 0.3f));
     }
 }
