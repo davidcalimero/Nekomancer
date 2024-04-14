@@ -107,12 +107,13 @@ public class LevelController : MonoBehaviour
             totalhealthPlayer = GameObject.FindGameObjectsWithTag("Evocation").ToList().Sum(x => x.GetComponent<EvocationController>().healthPoints);
             totalhealthEnemy = FindObjectsOfType<EnemyBehaviour>().ToList().Sum(x => x.healthMaxPoints);
 
-            float challengeStrength = challengeLevel + totalhealthEnemy - (energyPlayer + totalhealthPlayer);
+            float challengeStrength = currentChallengeLevel + totalhealthEnemy - (energyPlayer + totalhealthPlayer);
 
-            //print(" >>>" + challengeStrength);
+            print(" >>>" + challengeStrength);
             if (challengeStrength > 0)
             {
                 FindObjectOfType<EnemyWaveController>().generateEnergy = true;
+                yield return null;
             }
         }
     }

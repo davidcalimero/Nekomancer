@@ -1534,7 +1534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeChallenge: {x: -10, y: 25}
-  rangeMana: {x: 2, y: 8}
+  rangeMana: {x: 2, y: 4}
   totalhealthPlayer: 0
   energyPlayer: 0
   totalhealthEnemy: 0
