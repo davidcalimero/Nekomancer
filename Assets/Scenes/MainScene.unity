@@ -2640,11 +2640,11 @@ PrefabInstance:
       objectReference: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
     - target: {fileID: 1276490584062798507, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_FontData.m_MinSize
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1276490584062798507, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 1401336420244077876, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2656,11 +2656,11 @@ PrefabInstance:
       objectReference: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
     - target: {fileID: 2130521193966059238, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_FontData.m_MinSize
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2130521193966059238, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 2741232877896589075, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2672,11 +2672,11 @@ PrefabInstance:
       objectReference: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
     - target: {fileID: 4188912284680287444, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_FontData.m_MinSize
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4188912284680287444, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6207199896043514870, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2716,7 +2716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7442635665179612240, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8047581812802555030, guid: f511e175f3a86ce4a9812d7c9ca081d9, type: 3}
       propertyPath: m_Pivot.x
