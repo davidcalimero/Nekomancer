@@ -9,4 +9,9 @@ public class SummonerController : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
+
+    public void Die()
+    {
+        animator.SetBool("Dead", true);
+    }
 }

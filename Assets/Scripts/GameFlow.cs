@@ -24,6 +24,7 @@ public class GameFlow : MonoBehaviour
         {
             losePopup.SetActive(true);
             gameFinished = true;
+            summoner.GetComponent<SummonerController>().Die();
         }
     }
 
