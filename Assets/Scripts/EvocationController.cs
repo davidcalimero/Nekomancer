@@ -20,7 +20,6 @@ public class EvocationController : MonoBehaviour
     public void Start()
     {
         _lastFire = Time.time;
-        AudioManager.instance.PlaySummon();
     }
 
     void SpawnBullet()
