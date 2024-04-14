@@ -103,7 +103,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         if(reachedSummoner)
         {
-            FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane);
+            FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane, transform.position);
             GameFlow.instance.LoseLife(damage);
             Destroy(gameObject);
         }
@@ -163,8 +163,10 @@ public class EnemyBehaviour : MonoBehaviour
 
             Destroy(collision.gameObject);
 
-            if(healthPoints <= 0)
+            if(healthPoints <= 0){
+                FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane, transform.position);
                 Destroy(gameObject);
+            }
         }
 
         if(collision.tag.Equals("Player") && !reachedSummoner)

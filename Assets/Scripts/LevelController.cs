@@ -10,6 +10,7 @@ public class LevelController : MonoBehaviour
     public float totalhealthPlayer = 0;
     public float energyPlayer = 0;
 
+    public float totalhealthEnemy = 0;
     public float currentChallengeLevel = 0;
 
     private float timePerWave = 10;
@@ -52,6 +53,7 @@ public class LevelController : MonoBehaviour
     public void GenerateWave(float challengeLevel)
     {
         StartCoroutine(_GenerateWave(challengeLevel));
+        StartCoroutine(CheckEnergyGeneration(challengeLevel));
     }
 
     private IEnumerator _GenerateWave(float challengeLevel)
@@ -69,7 +71,7 @@ public class LevelController : MonoBehaviour
 
             if (challengeStrength > 0)
             {
-                FindObjectOfType<ManaManager>().SpawnEnergyObject();
+                FindObjectOfType<EnemyWaveController>().generateEnergy = true;
             }
 
             int _numEnemies = Random.Range(1, 7);
@@ -91,5 +93,25 @@ public class LevelController : MonoBehaviour
         }
         print("end");
         currentChallengeLevel = challengeLevel;
+    }
+
+    private IEnumerator CheckEnergyGeneration(float challengeLevel)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(2, 8));
+
+            energyPlayer = FindObjectOfType<ManaManager>().manaAmount;
+            totalhealthPlayer = GameObject.FindGameObjectsWithTag("Evocation").ToList().Sum(x => x.GetComponent<EvocationController>().healthPoints);
+            totalhealthEnemy = FindObjectsOfType<EnemyBehaviour>().ToList().Sum(x => x.healthMaxPoints);
+
+            float challengeStrength = challengeLevel + totalhealthEnemy - (energyPlayer + totalhealthPlayer);
+
+            print(" >>>" + challengeStrength);
+            if (challengeStrength > 0)
+            {
+                FindObjectOfType<EnemyWaveController>().generateEnergy = true;
+            }
+        }
     }
 }

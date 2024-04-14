@@ -11,6 +11,8 @@ public class EnemyWaveController : MonoBehaviour
 
     public List<int> occupationNum = new List<int>();
 
+    public bool generateEnergy = false;
+
     private List<GameObject> _enemyLanes; 
 
     public void Start()
@@ -132,9 +134,15 @@ public class EnemyWaveController : MonoBehaviour
         return _health;
     }
 
-    public void UpdateDeletedEnemy(int index)
+    public void UpdateDeletedEnemy(int index, Vector3 position)
     {
         occupationNum[index]--;
+
+        if (generateEnergy)
+        {
+            generateEnergy = false;
+            FindObjectOfType<ManaManager>().SpawnEnergyObject(position);
+        }
     }
 
     public int GetIfAloneLane(int index)
