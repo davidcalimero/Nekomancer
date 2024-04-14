@@ -51,7 +51,14 @@ public class EvocationController : MonoBehaviour
         healthPoints -= damage;
         if(healthPoints <= 0)
         {
-            Destroy(gameObject);
+            if(animator)
+            {
+                animator.SetTrigger("Death");
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 
@@ -75,5 +82,10 @@ public class EvocationController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }

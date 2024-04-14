@@ -92,13 +92,11 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (_evocationAttacking != null)
         {
-            _evocationAttacking.GetComponent<EvocationController>().healthPoints -= damage;
+            _evocationAttacking.GetComponent<EvocationController>().DamageFromEnemy(damage);
             if (_evocationAttacking.GetComponent<EvocationController>().healthPoints <= 0)
             {
                 _isAttacking = false;
                 _evocationAttacking.transform.parent.GetComponent<ObjectPlacement>().isFull = false;
-
-                Destroy(_evocationAttacking);
                 _evocationAttacking = null;
             }
         }
