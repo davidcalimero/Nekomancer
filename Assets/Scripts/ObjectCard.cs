@@ -35,6 +35,7 @@ public class ObjectCard : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
         if(HasEnoughMana() && dragInstance.GetComponent<ObjectDrag>().TryToPlaceObject())
         {
             ManaManager.instance.manaAmount -= manaCost;
+            GameFlow.instance.TriggerSummonerAttack();
         }
         Destroy(dragInstance);
         dragInstance = null;

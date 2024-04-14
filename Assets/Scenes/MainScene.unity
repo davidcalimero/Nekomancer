@@ -818,6 +818,8 @@ GameObject:
   - component: {fileID: 293638029}
   - component: {fileID: 293638028}
   - component: {fileID: 293638030}
+  - component: {fileID: 293638031}
+  - component: {fileID: 293638032}
   m_Layer: 5
   m_Name: Summoner
   m_TagString: Player
@@ -834,7 +836,7 @@ RectTransform:
   m_GameObject: {fileID: 293638026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 375410763}
@@ -842,7 +844,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 54, y: -752}
-  m_SizeDelta: {x: 47, y: 63}
+  m_SizeDelta: {x: 620, y: 620}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293638028
 MonoBehaviour:
@@ -864,7 +866,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d2b0f64158b45b849b64d268be8e61e8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bdc3a34d1d8b42118b6f0367756f2a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -925,8 +927,42 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20}
+  m_Size: {x: 400, y: 200}
   m_EdgeRadius: 0
+--- !u!95 &293638031
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293638026}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7eee0ca0c750a4d7494b97f308fbfaac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &293638032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293638026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c21daf6671c44ba980ba5edd192b22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 293638031}
 --- !u!1001 &368555264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1484,6 +1520,7 @@ MonoBehaviour:
   life: 30
   losePopup: {fileID: 1962571890}
   gameFinished: 0
+  summoner: {fileID: 293638026}
 --- !u!1 &503698900
 GameObject:
   m_ObjectHideFlags: 0

@@ -176,6 +176,7 @@ public class EnemyBehaviour : MonoBehaviour
             StartCoroutine(_FallObject(1, transform.GetChild(1).gameObject));
             StartCoroutine(_FallObject(2, transform.GetChild(2).gameObject));
             StartCoroutine(_FallObject(3, transform.GetChild(3).gameObject));
+            GameFlow.instance.TriggerSummonerAttack();
         }
     }
 

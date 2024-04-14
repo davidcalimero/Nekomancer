@@ -8,6 +8,7 @@ public class GameFlow : MonoBehaviour
     public float life;
     public GameObject losePopup;
     public bool gameFinished = false;
+    public GameObject summoner;
 
     public static GameFlow instance;
 
@@ -30,5 +31,10 @@ public class GameFlow : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void TriggerSummonerAttack()
+    {
+        summoner.GetComponent<SummonerController>().Attack();
     }
 }
