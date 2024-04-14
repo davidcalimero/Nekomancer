@@ -12,6 +12,7 @@ public class EvocationController : MonoBehaviour
     public GameObject bulletPrefab;
     public Animator animator;
     public AudioSource attack;
+    public AudioSource death;
 
     public ObjectPlacement placement;
 
@@ -58,6 +59,7 @@ public class EvocationController : MonoBehaviour
             if (animator)
             {
                 animator.SetTrigger("Death");
+                death.Play();
             }
             else
             {
