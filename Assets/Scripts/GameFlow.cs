@@ -12,6 +12,8 @@ public class GameFlow : MonoBehaviour
 
     public static GameFlow instance;
 
+    private bool retry;
+
     void Awake()
     {
         instance = this;
@@ -30,6 +32,7 @@ public class GameFlow : MonoBehaviour
 
     public void Retry()
     {
+        retry = true;
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
@@ -37,5 +40,12 @@ public class GameFlow : MonoBehaviour
     public void TriggerSummonerAttack()
     {
         summoner.GetComponent<SummonerController>().Attack();
+    }
+
+    private void OnDestroy()
+    {
+        if (retry) return;
+        PlayerPrefs.SetInt("Exit", 1);
+        PlayerPrefs.Save();
     }
 }
