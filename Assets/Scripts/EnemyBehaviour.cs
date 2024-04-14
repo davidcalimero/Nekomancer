@@ -22,6 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float heltmetHealth = 3;
     public bool hasHelmentDamange;
     public float helmentDamangeHealth = 2;
+    public AudioSource attack;
 
     public RectTransform initPos;
     public RectTransform endPos;
@@ -67,6 +68,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (Time.time - _lastDamage > rateDamage + _attackVariation)
             {
                 animator.SetTrigger("Attack");
+                attack.Play();
             }
         }
         else if (!facingSummoner && Vector2.Distance(transform.parent.GetComponent<RectTransform>().position, endPos.position) > 0.1f)
@@ -178,6 +180,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             reachedSummoner = true;
             animator.SetTrigger("Attack");
+            attack.Play();
             StartCoroutine(_FallObject(0, transform.GetChild(0).gameObject));
             StartCoroutine(_FallObject(1, transform.GetChild(1).gameObject));
             StartCoroutine(_FallObject(2, transform.GetChild(2).gameObject));
