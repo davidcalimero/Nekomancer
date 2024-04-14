@@ -109,7 +109,7 @@ public class LevelController : MonoBehaviour
 
             float challengeStrength = currentChallengeLevel + totalhealthEnemy - (energyPlayer + totalhealthPlayer);
 
-            print(" >>>" + challengeStrength);
+            //print(" >>>" + challengeStrength);
             if (challengeStrength > 0)
             {
                 FindObjectOfType<EnemyWaveController>().generateEnergy = true;
