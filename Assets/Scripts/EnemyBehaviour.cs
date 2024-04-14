@@ -23,6 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
     public bool hasHelmentDamange;
     public float helmentDamangeHealth = 2;
     public AudioSource attack;
+    public AudioSource damageSound;
 
     public RectTransform initPos;
     public RectTransform endPos;
@@ -123,6 +124,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         if (collision.tag.Equals("BulletNormal"))
         {
+            damageSound.Play();
             if (hasShield)
             {
                 shieldHealth -= collision.gameObject.GetComponent<BulletController>().damage;
