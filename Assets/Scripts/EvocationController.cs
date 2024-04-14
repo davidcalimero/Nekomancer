@@ -11,6 +11,7 @@ public class EvocationController : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Animator animator;
+    public AudioSource attack;
 
     public ObjectPlacement placement;
 
@@ -28,7 +29,7 @@ public class EvocationController : MonoBehaviour
         Vector3 position = transform.position;
         position.y += 25;
         _bullet.transform.position = position;
-
+        attack.Play();
     }
 
     void AttackEnemy()
