@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     public Vector2 rangeChallenge = new Vector2(-35, 35);
+    public Vector2 rangeMana = new Vector2(2, 8);
 
     public float totalhealthPlayer = 0;
     public float energyPlayer = 0;
@@ -100,7 +101,7 @@ public class LevelController : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(2, 8));
+            yield return new WaitForSeconds(Random.Range(rangeMana.x, rangeMana.y));
 
             energyPlayer = FindObjectOfType<ManaManager>().GetCurrentMana();
             totalhealthPlayer = GameObject.FindGameObjectsWithTag("Evocation").ToList().Sum(x => x.GetComponent<EvocationController>().healthPoints);
