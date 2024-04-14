@@ -36,7 +36,7 @@ public class LevelController : MonoBehaviour
 
         if (Time.time - _lastWave > timePerWave)
         {
-            print("new wave");
+            //print("new wave");
             StopAllCoroutines();
 
             float _randomValue = Random.Range(rangeChallenge.x, rangeChallenge.y);
@@ -63,7 +63,7 @@ public class LevelController : MonoBehaviour
         totalhealthEnemy = FindObjectsOfType<EnemyBehaviour>().ToList().Sum(x => x.healthMaxPoints);
 
         float challengeStrength = challengeLevel + totalhealthEnemy - (energyPlayer + totalhealthPlayer);
-        print(challengeStrength);
+        //print(challengeStrength);
         float totalStrength = challengeLevel;
 
         while (totalStrength > 0)
@@ -87,12 +87,12 @@ public class LevelController : MonoBehaviour
             for (int i = 0; i < _numEnemies; i++)
             {
                 totalStrength -= FindObjectOfType<EnemyWaveController>().GenerateNewRandomEnemy(challengeLevel / _numEnemies);
-                print("generated " + (challengeLevel / _numEnemies));
+                //print("generated " + (challengeLevel / _numEnemies));
                 yield return new WaitForSeconds(Random.Range(0, 4));
             }
             yield return null;
         }
-        print("end");
+        //print("end");
         currentChallengeLevel = challengeLevel;
     }
 
@@ -108,7 +108,7 @@ public class LevelController : MonoBehaviour
 
             float challengeStrength = challengeLevel + totalhealthEnemy - (energyPlayer + totalhealthPlayer);
 
-            print(" >>>" + challengeStrength);
+            //print(" >>>" + challengeStrength);
             if (challengeStrength > 0)
             {
                 FindObjectOfType<EnemyWaveController>().generateEnergy = true;

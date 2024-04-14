@@ -26,7 +26,16 @@ public class ObjectPlacement : MonoBehaviour
         if(!isFull)
         {
             isFull = true;
-            Instantiate(objectGame, transform).transform.position = transform.position;
+            GameObject obj = Instantiate(objectGame, transform.parent.GetChild(0));
+            obj.transform.position = transform.position;
+            obj.GetComponent<EvocationController>().placement = this;
+
+            for(int i = obj.transform.GetSiblingIndex() - 1; i > 1; i--)
+            {
+                if (obj.transform.GetComponent<RectTransform>().anchoredPosition.y > transform.parent.GetChild(0).GetChild(i).GetComponent<RectTransform>().anchoredPosition.y)
+                    obj.transform.SetSiblingIndex(i);
+            }
+
             return true;
         }
         return false;
