@@ -96,7 +96,6 @@ public class EnemyBehaviour : MonoBehaviour
             if (_evocationAttacking.GetComponent<EvocationController>().healthPoints <= 0)
             {
                 _isAttacking = false;
-                _evocationAttacking.transform.parent.GetComponent<ObjectPlacement>().isFull = false;
                 _evocationAttacking = null;
             }
         }

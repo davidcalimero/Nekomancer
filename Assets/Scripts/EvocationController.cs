@@ -12,6 +12,8 @@ public class EvocationController : MonoBehaviour
     public GameObject bulletPrefab;
     public Animator animator;
 
+    public ObjectPlacement placement;
+
     private float _lastFire;
     private float _variationFire = 0;
 
@@ -20,12 +22,13 @@ public class EvocationController : MonoBehaviour
         _lastFire = Time.time;
     }
 
-    void SpawnBullet() {
+    void SpawnBullet()
+    {
         GameObject _bullet = Instantiate(bulletPrefab, transform.parent.parent);
         Vector3 position = transform.position;
         position.y += 25;
         _bullet.transform.position = position;
-        
+
     }
 
     void AttackEnemy()
@@ -40,7 +43,7 @@ public class EvocationController : MonoBehaviour
             {
                 SpawnBullet();
             }
-            
+
             _lastFire = Time.time;
             _variationFire = Random.Range(.2f, .6f);
         }
@@ -49,9 +52,9 @@ public class EvocationController : MonoBehaviour
     public void DamageFromEnemy(float damage)
     {
         healthPoints -= damage;
-        if(healthPoints <= 0)
+        if (healthPoints <= 0)
         {
-            if(animator)
+            if (animator)
             {
                 animator.SetTrigger("Death");
             }
@@ -74,9 +77,19 @@ public class EvocationController : MonoBehaviour
 
     private bool IsReadyToAttack()
     {
-        if(transform.parent.parent.GetChild(0).transform.childCount > 2)
+        if (transform.parent.parent.GetChild(0).transform.childCount > 2)
         {
-            if(Vector3.Distance(transform.position, transform.parent.parent.GetChild(0).transform.GetChild(transform.parent.parent.GetChild(0).transform.childCount - 1).position) < distance)
+            Transform nextEnemy = null;
+            for (int i = transform.parent.childCount - 1; i > 1; --i)
+            {
+                if (transform.parent.GetChild(i).GetComponent<EvocationController>() == null)
+                {
+                    nextEnemy = transform.parent.GetChild(i);
+                    break;
+                }
+            }
+            if (nextEnemy == null) return false;
+            if (Vector3.Distance(transform.position, nextEnemy.position) < distance)
             {
                 return true;
             }
@@ -86,6 +99,15 @@ public class EvocationController : MonoBehaviour
 
     private void Die()
     {
+
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (placement != null)
+        {
+            placement.isFull = false;
+        }
     }
 }
