@@ -58,7 +58,7 @@ public class LevelController : MonoBehaviour
 
     private IEnumerator _GenerateWave(float challengeLevel)
     {
-        energyPlayer = FindObjectOfType<ManaManager>().manaAmount;
+        energyPlayer = FindObjectOfType<ManaManager>().GetCurrentMana();
         totalhealthPlayer = GameObject.FindGameObjectsWithTag("Evocation").ToList().Sum(x => x.GetComponent<EvocationController>().healthPoints);
         totalhealthEnemy = FindObjectsOfType<EnemyBehaviour>().ToList().Sum(x => x.healthMaxPoints);
 
@@ -102,7 +102,7 @@ public class LevelController : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(2, 8));
 
-            energyPlayer = FindObjectOfType<ManaManager>().manaAmount;
+            energyPlayer = FindObjectOfType<ManaManager>().GetCurrentMana();
             totalhealthPlayer = GameObject.FindGameObjectsWithTag("Evocation").ToList().Sum(x => x.GetComponent<EvocationController>().healthPoints);
             totalhealthEnemy = FindObjectsOfType<EnemyBehaviour>().ToList().Sum(x => x.healthMaxPoints);
 

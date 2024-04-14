@@ -34,7 +34,7 @@ public class ObjectCard : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     {
         if(HasEnoughMana() && dragInstance.GetComponent<ObjectDrag>().TryToPlaceObject())
         {
-            ManaManager.instance.manaAmount -= manaCost;
+            ManaManager.instance.IncrementMana(-manaCost);
             GameFlow.instance.TriggerSummonerAttack();
         }
         Destroy(dragInstance);
@@ -55,7 +55,7 @@ public class ObjectCard : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
 
     private bool HasEnoughMana()
     {
-        return ManaManager.instance.manaAmount >= manaCost;
+        return ManaManager.instance.GetCurrentMana() >= manaCost;
     }
 
 }

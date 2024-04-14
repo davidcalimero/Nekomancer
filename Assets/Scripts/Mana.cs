@@ -37,7 +37,7 @@ public class Mana : MonoBehaviour
         }
         obj.transform.position = end;
 
-        ManaManager.instance.manaAmount += manaAmount;
+        ManaManager.instance.IncrementMana(manaAmount);
         Destroy(gameObject);
     }
 

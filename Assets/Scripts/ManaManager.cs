@@ -10,8 +10,9 @@ public class ManaManager : MonoBehaviour
     public GameObject summoner;
     public GameObject manaObject;
     public Text manaAmountText;
-    public int manaAmount = 0;
+    [SerializeField] private int manaAmount = 0;
     public RectTransform ui;
+    public AudioSource collectMana;
 
     public static ManaManager instance;
 
@@ -40,5 +41,16 @@ public class ManaManager : MonoBehaviour
         obj.transform.position = position;
         obj.GetComponent<Mana>().target = ui;
 
+    }
+
+    public void IncrementMana(int amount)
+    {
+        manaAmount += amount;
+        collectMana.Play();
+    }
+
+    public int GetCurrentMana()
+    {
+        return manaAmount;
     }
 }
