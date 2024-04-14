@@ -95,7 +95,7 @@ MonoBehaviour:
   healthPoints: 50
   distance: 400
   cooldownFire: 1
-  bulletPrefab: {fileID: 670216446400468744, guid: 3dd99a79ccdcb9641b2209140d02ef8f, type: 3}
+  bulletPrefab: {fileID: 670216446400468744, guid: cb9c34e44177242078104979cf1f85d3, type: 3}
   animator: {fileID: -417942783607137710}
   attack: {fileID: 60556804414159459}
   placement: {fileID: 0}
