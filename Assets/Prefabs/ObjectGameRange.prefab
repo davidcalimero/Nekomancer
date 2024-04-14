@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4972269670061956280}
   - component: {fileID: -998302331277794596}
   - component: {fileID: 60556804414159459}
+  - component: {fileID: -417942783607137710}
   m_Layer: 5
   m_Name: ObjectGameRange
   m_TagString: Evocation
@@ -69,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: abbe7cabbcbd546edac6d3b2479f6459, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 67ee61be2a81e442d8afcc574ccd865e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -95,7 +96,7 @@ MonoBehaviour:
   distance: 400
   cooldownFire: 1
   bulletPrefab: {fileID: 670216446400468744, guid: 3dd99a79ccdcb9641b2209140d02ef8f, type: 3}
-  animator: {fileID: 0}
+  animator: {fileID: -417942783607137710}
   attack: {fileID: 60556804414159459}
   placement: {fileID: 0}
 --- !u!61 &4972269670061956280
@@ -335,3 +336,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &-417942783607137710
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636129298785759315}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46515f72ce74246e99cf8bb22a1a5f8b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
