@@ -113,6 +113,7 @@ public class LevelController : MonoBehaviour
             {
                 FindObjectOfType<EnemyWaveController>().generateEnergy = true;
             }
+            FindObjectOfType<EnemyWaveController>().generateEnergy = true;
         }
     }
 }

@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8d59195d98d6c4cb5c731861ad927e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 100
+  healthPoints: 60
   distance: 200
-  cooldownFire: 1.5
+  cooldownFire: 5
   bulletPrefab: {fileID: 670216446400468744, guid: 3dd99a79ccdcb9641b2209140d02ef8f, type: 3}
   animator: {fileID: -7294501287462617046}
   attack: {fileID: 6924973128482107989}

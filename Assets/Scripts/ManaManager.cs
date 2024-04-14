@@ -24,9 +24,13 @@ public class ManaManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         SpawnEnergyObject(summoner.transform.position);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        SpawnEnergyObject(summoner.transform.position);
+        yield return new WaitForSeconds(0.5f);
+        SpawnEnergyObject(summoner.transform.position);
+        yield return new WaitForSeconds(0.5f);
         SpawnEnergyObject(summoner.transform.position);
     }
 

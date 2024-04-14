@@ -88,4 +88,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2dc36de49a6435cb744c8e9324d211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaAmount: 100
+  manaAmount: 50
+  target: {fileID: 0}
