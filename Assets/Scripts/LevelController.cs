@@ -60,8 +60,9 @@ public class LevelController : MonoBehaviour
     {
         energyPlayer = FindObjectOfType<ManaManager>().manaAmount;
         totalhealthPlayer = GameObject.FindGameObjectsWithTag("Evocation").ToList().Sum(x => x.GetComponent<EvocationController>().healthPoints);
+        totalhealthEnemy = FindObjectsOfType<EnemyBehaviour>().ToList().Sum(x => x.healthMaxPoints);
 
-        float challengeStrength = challengeLevel - (energyPlayer + totalhealthPlayer);
+        float challengeStrength = challengeLevel + totalhealthEnemy - (energyPlayer + totalhealthPlayer);
         print(challengeStrength);
         float totalStrength = challengeLevel;
 
