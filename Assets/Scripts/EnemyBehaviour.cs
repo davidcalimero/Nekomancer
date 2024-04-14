@@ -22,7 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float heltmetHealth = 3;
     public bool hasHelmentDamange;
     public float helmentDamangeHealth = 2;
-    
+
     public RectTransform initPos;
     public RectTransform endPos;
     public GameObject summoner;
@@ -42,7 +42,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public IEnumerator Start()
     {
-        transform.GetComponent<RectTransform>().position = initPos.position;
+        transform.parent.GetComponent<RectTransform>().position = initPos.position;
 
         _variation = Random.Range(0.7f, 0.9f);
         _variationNextEnemy = Random.Range(10, 45);
@@ -57,35 +57,38 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Update()
     {
-        if(GameFlow.instance.gameFinished)
+        if (GameFlow.instance.gameFinished)
         {
             return;
         }
 
         if (_isAttacking && _evocationAttacking)
         {
-            if(Time.time - _lastDamage > rateDamage + _attackVariation)
+            if (Time.time - _lastDamage > rateDamage + _attackVariation)
             {
                 animator.SetTrigger("Attack");
             }
         }
-        else if (!facingSummoner && Vector2.Distance(transform.GetComponent<RectTransform>().position, endPos.position) > 0.1f)
+        else if (!facingSummoner && Vector2.Distance(transform.parent.GetComponent<RectTransform>().position, endPos.position) > 0.1f)
         {
-            if(transform.GetSiblingIndex() < transform.parent.childCount - 1)
+            if (transform.parent.GetSiblingIndex() < transform.parent.parent.childCount - 1)
             {
-                if(Vector2.Distance(transform.GetComponent<RectTransform>().position, transform.parent.GetChild(transform.GetSiblingIndex()+1).GetComponent<RectTransform>().position) < _variationNextEnemy)
+                if (Vector2.Distance(transform.parent.GetComponent<RectTransform>().position, transform.parent.parent.GetChild(transform.parent.GetSiblingIndex() + 1).GetComponent<RectTransform>().position) < _variationNextEnemy)
                 {
                     return;
                 }
             }
 
-            transform.GetComponent<RectTransform>().position += (endPos.position - transform.GetComponent<RectTransform>().position).normalized * 50 * _variation * speed * Time.deltaTime;
-            facingSummoner = Vector2.Distance(transform.GetComponent<RectTransform>().position, endPos.position) <= 0.1f;
+
+            transform.parent.GetComponent<RectTransform>().position += (endPos.position - transform.parent.GetComponent<RectTransform>().position).normalized * 50 * _variation * speed * Time.deltaTime;
+            facingSummoner = Vector2.Distance(transform.parent.GetComponent<RectTransform>().position, endPos.position) <= 0.1f;
+
         }
-        else if(facingSummoner && !reachedSummoner && Vector2.Distance(transform.GetComponent<RectTransform>().position, summoner.GetComponent<RectTransform>().position) > 0.1f)
+        else if (facingSummoner && !reachedSummoner && Vector2.Distance(transform.parent.GetComponent<RectTransform>().position, summoner.GetComponent<RectTransform>().position) > 0.1f)
         {
-            transform.GetComponent<RectTransform>().position += (summoner.GetComponent<RectTransform>().position - transform.GetComponent<RectTransform>().position).normalized * 50 * _variation * speed * Time.deltaTime;
+            transform.parent.GetComponent<RectTransform>().position += (summoner.GetComponent<RectTransform>().position - transform.parent.GetComponent<RectTransform>().position).normalized * 50 * _variation * speed * Time.deltaTime;
         }
+
     }
 
     private void Attack()
@@ -100,11 +103,11 @@ public class EnemyBehaviour : MonoBehaviour
             }
         }
 
-        if(reachedSummoner)
+        if (reachedSummoner)
         {
             FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane, transform.position);
             GameFlow.instance.LoseLife(damage);
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
 
         _lastDamage = Time.time;
@@ -122,17 +125,18 @@ public class EnemyBehaviour : MonoBehaviour
             if (hasShield)
             {
                 shieldHealth -= collision.gameObject.GetComponent<BulletController>().damage;
-                if(shieldHealth <= 0)
+                if (shieldHealth <= 0)
                 {
                     hasShield = false;
                     hasShieldDamage = true;
                     UpdateVisuals();
                 }
             }
-            else if(hasShieldDamage)
+            else if (hasShieldDamage)
             {
                 shieldDamageHealth -= collision.gameObject.GetComponent<BulletController>().damage;
-                if (shieldDamageHealth <= 0) {
+                if (shieldDamageHealth <= 0)
+                {
                     hasShieldDamage = false;
                     StartCoroutine(_FallObject(3, transform.GetChild(3).gameObject));
                 }
@@ -150,9 +154,10 @@ public class EnemyBehaviour : MonoBehaviour
             else if (hasHelmentDamange)
             {
                 helmentDamangeHealth -= collision.gameObject.GetComponent<BulletController>().damage;
-                if (helmentDamangeHealth <= 0) {
+                if (helmentDamangeHealth <= 0)
+                {
                     hasHelmentDamange = false;
-                    StartCoroutine(_FallObject(1,transform.GetChild(1).gameObject));
+                    StartCoroutine(_FallObject(1, transform.GetChild(1).gameObject));
                 }
             }
             else
@@ -162,13 +167,14 @@ public class EnemyBehaviour : MonoBehaviour
 
             Destroy(collision.gameObject);
 
-            if(healthPoints <= 0){
+            if (healthPoints <= 0)
+            {
                 FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane, transform.position);
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
             }
         }
 
-        if(collision.tag.Equals("Player") && !reachedSummoner)
+        if (collision.tag.Equals("Player") && !reachedSummoner)
         {
             reachedSummoner = true;
             animator.SetTrigger("Attack");
@@ -190,14 +196,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     private IEnumerator _FallObject(int item, GameObject obj)
     {
-        yield return new WaitForSeconds(.1f + Random.Range(.1f,.4f));
+        yield return new WaitForSeconds(.1f + Random.Range(.1f, .4f));
 
         Vector2 _initPos = obj.GetComponent<RectTransform>().anchoredPosition;
 
         float _elapsed = 0;
-        while(_elapsed < 1)
+        while (_elapsed < 1)
         {
-            _elapsed += Time.deltaTime/4.0f;
+            _elapsed += Time.deltaTime / 4.0f;
 
             obj.GetComponent<Image>().color = Color.Lerp(obj.GetComponent<Image>().color, new Color(obj.GetComponent<Image>().color.r, obj.GetComponent<Image>().color.g, obj.GetComponent<Image>().color.b, 0), _elapsed);
             obj.GetComponent<RectTransform>().anchoredPosition += ((_initPos - new Vector2(0, 200)) - _initPos).normalized * 25.0f * _elapsed;
