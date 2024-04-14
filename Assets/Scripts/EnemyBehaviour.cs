@@ -41,6 +41,7 @@ public class EnemyBehaviour : MonoBehaviour
     private float _attackVariation = 0;
     private bool facingSummoner = false;
     private bool reachedSummoner = false;
+    private bool died = false;
 
     public IEnumerator Start()
     {
@@ -59,7 +60,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Update()
     {
-        if (GameFlow.instance.gameFinished)
+        if (GameFlow.instance.gameFinished || died)
         {
             return;
         }
@@ -111,7 +112,8 @@ public class EnemyBehaviour : MonoBehaviour
         {
             FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane, transform.position);
             GameFlow.instance.LoseLife(damage);
-            Destroy(transform.parent.gameObject);
+            animator.SetTrigger("Death");
+            died = true;
         }
     }
 
@@ -173,7 +175,8 @@ public class EnemyBehaviour : MonoBehaviour
             if (healthPoints <= 0)
             {
                 FindObjectOfType<EnemyWaveController>().UpdateDeletedEnemy(indexLane, transform.position);
-                Destroy(transform.parent.gameObject);
+                animator.SetTrigger("Death");
+                died = true;
             }
         }
 
@@ -220,6 +223,11 @@ public class EnemyBehaviour : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
 
+    }
+
+    public void Die()
+    {
+        Destroy(transform.parent.gameObject);
     }
 
 }
