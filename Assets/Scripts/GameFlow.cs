@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -47,5 +48,15 @@ public class GameFlow : MonoBehaviour
         if (retry) return;
         PlayerPrefs.SetInt("Exit", 1);
         PlayerPrefs.Save();
+    }
+
+    void OnApplicationPause()
+    {
+        if (retry) return;
+        PlayerPrefs.SetInt("Exit", 1);
+        PlayerPrefs.Save();
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }
