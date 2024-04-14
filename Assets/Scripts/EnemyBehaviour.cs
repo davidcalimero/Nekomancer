@@ -69,6 +69,7 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 animator.SetTrigger("Attack");
                 attack.Play();
+                _lastDamage = Time.time;
             }
         }
         else if (!facingSummoner && Vector2.Distance(transform.parent.GetComponent<RectTransform>().position, endPos.position) > 0.1f)
@@ -111,8 +112,6 @@ public class EnemyBehaviour : MonoBehaviour
             GameFlow.instance.LoseLife(damage);
             Destroy(transform.parent.gameObject);
         }
-
-        _lastDamage = Time.time;
     }
 
     public void OnTriggerStay2D(Collider2D collision)
@@ -181,6 +180,7 @@ public class EnemyBehaviour : MonoBehaviour
             reachedSummoner = true;
             animator.SetTrigger("Attack");
             attack.Play();
+            _lastDamage = Time.time;
             StartCoroutine(_FallObject(0, transform.GetChild(0).gameObject));
             StartCoroutine(_FallObject(1, transform.GetChild(1).gameObject));
             StartCoroutine(_FallObject(2, transform.GetChild(2).gameObject));
