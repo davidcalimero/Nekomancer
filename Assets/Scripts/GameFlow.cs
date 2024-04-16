@@ -28,6 +28,7 @@ public class GameFlow : MonoBehaviour
             losePopup.SetActive(true);
             gameFinished = true;
             summoner.GetComponent<SummonerController>().Die();
+            life = 0;
         }
     }
 
@@ -56,7 +57,7 @@ public class GameFlow : MonoBehaviour
         PlayerPrefs.SetInt("Exit", 1);
         PlayerPrefs.Save();
 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        //string currentSceneName = SceneManager.GetActiveScene().name;
+        //SceneManager.LoadScene(currentSceneName);
     }
 }
