@@ -32,6 +32,7 @@ public class ManaManager : MonoBehaviour
 
     void Update()
     {
+        manaAmount = Mathf.Clamp(manaAmount, 0, 9999);
         manaAmountText.text = manaAmount.ToString();
     }
 

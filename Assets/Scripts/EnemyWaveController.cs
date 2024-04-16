@@ -29,6 +29,10 @@ public class EnemyWaveController : MonoBehaviour
         {
             //GenerateNewRandomEnemy();
         }
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            //GenerateNewRandomEnemySuper(10000);
+        }
     }
 
     public void GenerateNewRandomEnemy()
