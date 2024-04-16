@@ -8,6 +8,7 @@ TagManager:
   - BulletNormal
   - Encantation
   - Evocation
+  - Placement
   layers:
   - Default
   - TransparentFX

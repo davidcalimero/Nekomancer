@@ -76,9 +76,9 @@ public class LevelController : MonoBehaviour
                 FindObjectOfType<EnemyWaveController>().generateEnergy = true;
             }
 
-            int _numEnemies = Random.Range(1, 7);
+            int _numEnemies = (int) Random.Range(1.0f, Mathf.Clamp((float)(2.0f + ((7.0f - 2.0f) * totalStrength / (float)challengeLevel)), 2.0f, 7.0f)) ;
 
-            if(energyPlayer > 1000)
+            if (energyPlayer > 1000)
             {
                 totalStrength -= FindObjectOfType<EnemyWaveController>().GenerateNewRandomEnemySuper(2.0f * challengeLevel / _numEnemies);
                 yield return new WaitForSeconds(Random.Range(0, 4));

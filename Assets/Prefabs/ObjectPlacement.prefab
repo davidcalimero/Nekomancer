@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3075861624214389370}
   m_Layer: 7
   m_Name: ObjectPlacement
-  m_TagString: Untagged
+  m_TagString: Placement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
